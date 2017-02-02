@@ -2,6 +2,9 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import 'bootstrap/less/bootstrap.less';
+
+import ListChores from './ListChores';
 
 var App = React.createClass({
   
@@ -24,9 +27,16 @@ var App = React.createClass({
     this.serverRequest.abort();
   },
   
+    handleSubmit: function (event) {
+    event.preventDefault();
+    // Scroll to the top of the page to show the status message.
+    document.getElementById('heading').scrollIntoView();
+    this.setState({ type: 'info', message: 'Sending...' }, this.sendFormData);
+  },
+  
   render: function() {
     return (
-      
+
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -50,9 +60,15 @@ var App = React.createClass({
           );
         })}
         </ul>
+          <ListChores />
       </div>
+      
+      
+      
     );
   }
 });
+
+
 
 export default App;
