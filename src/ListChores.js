@@ -8,12 +8,14 @@ import { Button, ButtonToolbar } from 'react-bootstrap';
     );
 
 class ListChores extends Component {
-    
+
     constructor(props) {
+
       super(props);
 		
       this.state = {
-         data: 'Initial data...'
+         data: 'Chore here...',
+         when: (new Date).getTime()
       }
 
       this.updateState = this.updateState.bind(this);
@@ -24,14 +26,22 @@ class ListChores extends Component {
       this.setState({data: e.target.value});
    }
    
+    handleSubmit(e) {
+        this.setState({data: 'you pressed it'});
+    }
+
+   
      render() {
       return (
          <div>
-            <form action="" onSubmit={this.handleSubmit}>
-            <input type="text" value={this.state.data} 
-               onChange={this.updateState} /> {buttonsInstance}
-            <h4>{this.state.data}</h4>
+            <form action="https://chorescore-pljhll.c9users.io/api/chores" method="post" onSubmit={this.handleSubmit}>
+            <input type="text" name="name" value={this.state.data} 
+               onChange={this.updateState} /> 
+            <input type="text" name="who" />
+            <input type="hidden" name="when" value={this.state.when} />
+            <button>Submit</button>
             </form>
+            <h4>{this.state.data}</h4>
          </div>
       );
    }

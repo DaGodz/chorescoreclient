@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './chorescore_logo.jpg';
 import './App.css';
 import axios from 'axios';
 import 'bootstrap/less/bootstrap.less';
@@ -35,28 +35,25 @@ var App = React.createClass({
   },
   
   render: function() {
+    
     return (
 
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Welcome to ChoreScores</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload. HELLO DAVE! BOOM! WHAT?!
+          
         </p>
         
         <ul>
         {this.state.chores.map(function(chore) {
+        var choreDate = new Date(chore.when)
           return (
-            <li>
-              
-                {chore.name}
-                was done by 
-                {chore.who} on
-                {chore.when}
-              
-            </li>
+            <div>
+                {chore.name} was done by {chore.who} on {choreDate.toLocaleString()}
+            </div>
           );
         })}
         </ul>
